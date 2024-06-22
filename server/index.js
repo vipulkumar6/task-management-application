@@ -10,9 +10,21 @@ dotenv.config();
 
 // Middleware
 app.use(bodyParser.json());
-app.use(cors());
 
 app.use("/", route)
+
+
+// vercel configuration
+
+// Allow all origins
+// Allow specific origin(s) 
+app.use(cors());
+
+app.use(cors({
+    origin: 'https://task-management-application-fuph.vercel.app/',
+    methods: ['POST', 'GET'],
+    credentials: true
+}));
 
 // MongoDB connection
 const db = process.env.DB_URL;
