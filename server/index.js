@@ -21,7 +21,7 @@ app.use("/", route)
 app.use(cors());
 
 app.use(cors({
-    origin: 'https://task-management-application-fuph.vercel.app/',
+    origin: 'https://task-management-application-fuph.vercel.app',
     methods: ['POST', 'GET'],
     credentials: true
 }));
