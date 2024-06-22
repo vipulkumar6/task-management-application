@@ -20,8 +20,6 @@ const TaskForm = ({ task, onClose, refreshTasks }) => {
         ...initialData,
         due_date: initialData.due_date ? parseDate(formatDate(initialData.due_date)) : null
     });
-
-    axios.defaults.withCredentials = true;
     const handleChange = (e) => {
         if (e.target) {
             const { name, value, type, checked } = e.target;
@@ -41,10 +39,10 @@ const TaskForm = ({ task, onClose, refreshTasks }) => {
             };
 
             if (task) {
-                await axios.put(`https://task-management-application-azure.vercel.app/${task._id}`, dataToSubmit);
+                await axios.put(`http://localhost:5000/update/${task._id}`, dataToSubmit);
                 toast.success('Task updated successfully');
             } else {
-                await axios.post('https://task-management-application-azure.vercel.app/create', dataToSubmit);
+                await axios.post('http://localhost:5000/create', dataToSubmit);
                 toast.success('Task created successfully');
             }
             refreshTasks();

@@ -17,7 +17,7 @@ const HomePage = () => {
 
     const fetchTasks = async () => {
         try {
-            const response = await axios.get('https://task-management-application-azure.vercel.app/getall');
+            const response = await axios.get('http://localhost:5000/getall');
             const sortedTasks = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
             setTasks(sortedTasks);
         } catch (error) {
@@ -41,7 +41,7 @@ const HomePage = () => {
 
     const handleDeleteTask = async (id) => {
         try {
-            await axios.delete(`https://task-management-application-azure.vercel.app/${id}`);
+            await axios.delete(`http://localhost:5000/delete/${id}`);
             toast.success('Task deleted successfully');
             fetchTasks();
         } catch (error) {
