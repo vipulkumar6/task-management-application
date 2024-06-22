@@ -1,0 +1,378 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+  font-family: "Poppins",
+    sans-serif;
+  background: #F9FAF5 !important;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.App {
+  text-align: center;
+  padding: 20px;
+}
+
+.task {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+  /* padding: 10px; */
+  margin: 10px;
+  border-radius: 10px;
+  width: 350px;
+  background-color: #fff;
+  /* flex-wrap: wrap; */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  position: relative;
+}
+
+
+@media (max-width: 780px) {
+  .task {
+    flex-direction: column;
+    /* border: 2px solid; */
+    align-items: start;
+
+    width: 95%
+  }
+
+
+  .task_list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .task-header {
+    display: flex;
+    width: 100%;
+  }
+
+  .allbuttons {
+    width: 100%;
+  }
+
+  .home_container .header {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #cbc9c9;
+
+  }
+
+  .home_container .header h2 {
+    font-family: "Poppins", sans-serif !important;
+    font-size: 20px !important;
+    font-weight: 600 !important;
+
+  }
+
+  .common_dark_btn {
+
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    border-radius: 5px;
+    margin: 12px 0;
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    font-size: 13px;
+  }
+
+  .saveBtn {
+    padding: 10px 14px !important;
+  }
+
+  .cancelBtn {
+    padding: 10px 14px !important;
+  }
+}
+
+
+.task .divider {
+  border: 0.2px solid #ddd !important;
+  margin-bottom: 5px;
+}
+
+.task .allbuttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 10px;
+}
+
+
+.task .allbuttons button {
+  border: none;
+  outline: none;
+  background: none;
+  padding: 0 8px;
+  cursor: pointer;
+}
+
+.task h3 {
+  font-size: 20px;
+  font-weight: 600;
+
+}
+
+.task .desc {
+  padding: 10px;
+  flex: 1;
+  margin-bottom: 10px;
+}
+
+.task .date {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center !important;
+
+}
+
+.task .date p {
+  font-size: 15px;
+  color: grey;
+
+}
+
+.task .date p span {
+  margin-right: 6px;
+
+}
+
+.important-tag {
+  /* margin-left: 10px; */
+  padding: 2px 6px;
+  background-color: red;
+  color: white;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.task-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+
+.tabs h3 {}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: left;
+  width: 500px;
+
+}
+
+.modal-content form label {
+  display: block;
+  margin: 10px 0;
+}
+
+.modal-content form input {
+  width: 100%;
+  padding: 5px;
+  margin-top: 5px;
+  border: none;
+  outline: none;
+}
+
+.modal form .input {
+  margin: 10px 0;
+}
+
+.modal .buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.saveBtn {
+
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  border-radius: 5px;
+  margin: 12px 0;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  border: 1px solid #000 !important;
+  margin-right: 10px;
+  width: 120px;
+  justify-content: center;
+}
+
+.cancelBtn {
+
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  border-radius: 5px;
+  margin: 12px 0;
+  background-color: #fff;
+  border: 1px solid #000 !important;
+  cursor: pointer;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  width: 120px;
+  justify-content: center;
+
+}
+
+
+.task_list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.task_list .all_tasks {
+  /* flex: 1; */
+}
+
+.home_container {
+  padding: 20px;
+}
+
+
+.home_container .tabs {
+
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+
+}
+
+@media (max-width: 600px) {
+  .home_container .tabs {
+    /* flex-direction: column; */
+    align-items: center;
+    /* flex-wrap: wrap; */
+    display: flex;
+    /* justify-content: space-between; */
+    flex-wrap: wrap;
+
+    margin: 10px 0;
+  }
+
+  .home_container .tabs button {
+    margin: 5px !important;
+    height: 40px !important;
+    width: 160px !important;
+  }
+
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: left;
+    width: 90%;
+
+  }
+}
+
+.home_container .tabs button {
+
+  border: none;
+  height: 100px;
+  margin: 10px;
+  width: 250px;
+  cursor: pointer;
+  font-size: 20px;
+  background-color: #fff;
+  border-radius: 7px;
+  border-left: 5px solid;
+}
+
+.home_container .tabs .all {
+  background-color: #c9e2f8;
+  color: #51a4ed;
+}
+
+.home_container .tabs .today {
+  background-color: #f4f6d0;
+  color: #9a9f43;
+}
+
+.home_container .tabs .tom {
+  background-color: #eedcf1;
+  color: #ba71c7;
+}
+
+.home_container .tabs .pending {
+  background-color: #f8dcdc;
+  color: #f56363;
+}
+
+.home_container .tabs .completed {
+  background-color: #e1f5ea;
+  color: #6bc893;
+}
+
+.home_container .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #cbc9c9;
+
+}
+
+.home_container .header h2 {
+  font-family: "Poppins", sans-serif !important;
+  font-size: 30px;
+  font-weight: 600 !important;
+
+}
+
+.common_dark_btn {
+
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 5px;
+  margin: 12px 0;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  border: none;
+  outline: none;
+}
