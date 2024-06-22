@@ -21,6 +21,7 @@ const TaskForm = ({ task, onClose, refreshTasks }) => {
         due_date: initialData.due_date ? parseDate(formatDate(initialData.due_date)) : null
     });
 
+    axios.defaults.withCredentials = true;
     const handleChange = (e) => {
         if (e.target) {
             const { name, value, type, checked } = e.target;

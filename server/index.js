@@ -18,13 +18,14 @@ app.use("/", route)
 
 // Allow all origins
 // Allow specific origin(s) 
-app.use(cors());
 
 app.use(cors({
-    origin: 'https://task-management-application-fuph.vercel.app/',
-    methods: ['POST', 'GET'],
-    credentials: true
+    origin: 'https://task-management-application-fuph.vercel.app',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    optionSuccessStatus: 200
 }));
+
 
 // MongoDB connection
 const db = process.env.DB_URL;
