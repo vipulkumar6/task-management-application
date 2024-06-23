@@ -39,10 +39,10 @@ const TaskForm = ({ task, onClose, refreshTasks }) => {
             };
 
             if (task) {
-                await axios.put(`http://localhost:5000/update/${task._id}`, dataToSubmit);
+                await axios.put(`https://task-management-application-6she.onrender.com/update/${task._id}`, dataToSubmit);
                 toast.success('Task updated successfully');
             } else {
-                await axios.post('http://localhost:5000/create', dataToSubmit);
+                await axios.post('https://task-management-application-6she.onrender.com/create', dataToSubmit);
                 toast.success('Task created successfully');
             }
             refreshTasks();
