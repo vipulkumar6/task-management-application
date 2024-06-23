@@ -210,6 +210,15 @@
   outline: none;
 }
 
+.modal-content .task_add_head {
+  font-weight: 600 !important;
+  font-size: 17px;
+}
+
+.modal-content .task_add_head_divider {
+  margin: 6px 0;
+}
+
 .modal form .input {
   margin: 10px 0;
 }
@@ -283,20 +292,24 @@
 
 @media (max-width: 600px) {
   .home_container .tabs {
-    /* flex-direction: column; */
-    align-items: center;
-    /* flex-wrap: wrap; */
-    display: flex;
-    /* justify-content: space-between; */
-    flex-wrap: wrap;
 
+    /* align-items: center; */
+
+    display: flex;
+    flex-wrap: wrap;
     margin: 10px 0;
+    justify-content: space-around;
   }
 
   .home_container .tabs button {
     margin: 5px !important;
     height: 40px !important;
-    width: 160px !important;
+    flex: 1 1 calc(50% - 10px);
+    box-sizing: border-box;
+  }
+
+  .home_container .tabs button:nth-child(5) {
+    flex: 1 1 100%;
   }
 
   .modal-content {
@@ -360,6 +373,24 @@
   font-size: 30px;
   font-weight: 600 !important;
 
+}
+
+
+.home_container .loader {
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.home_container .loader_for_add {
+  /* height: 50px; */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .common_dark_btn {

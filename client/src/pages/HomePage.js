@@ -4,12 +4,16 @@ import TaskForm from '../components/TaskForm';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import { IoAddOutline } from "react-icons/io5";
+import Swal from 'sweetalert2'
+
+import { RevolvingDot } from 'react-loader-spinner'
 
 const HomePage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentTask, setCurrentTask] = useState(null);
     const [filter, setFilter] = useState('');
     const [tasks, setTasks] = useState([]);
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         fetchTasks();
@@ -22,6 +26,9 @@ const HomePage = () => {
             setTasks(sortedTasks);
         } catch (error) {
             toast.error('Failed to fetch tasks');
+        }
+        finally {
+            setLoading(false);
         }
     };
 
@@ -36,14 +43,39 @@ const HomePage = () => {
     };
 
     const handleViewTask = (task) => {
-        toast(`Title: ${task.title}\nDescription: ${task.description}\nDue Date: ${new Date(task.due_date).toLocaleDateString()}`);
+        const { title, description, due_date } = task;
+
+        Swal.fire({
+            title: title,
+            icon: "success",
+            html: `
+            <p><strong>Description:</strong> ${description}</p>
+            <small><strong>Due Date:</strong> ${new Date(due_date).toLocaleDateString()}</small>
+        `,
+            showCloseButton: true,
+            showCancelButton: true,
+            focusConfirm: false,
+            confirmButtonText: 'OK',
+        });
     };
+
 
     const handleDeleteTask = async (id) => {
         try {
-            await axios.delete(`https://task-management-application-6she.onrender.com/delete/${id}`);
-            toast.success('Task deleted successfully');
-            fetchTasks();
+
+            const result = await Swal.fire({
+                title: "Are you sure you want to delete this task?",
+                showDenyButton: true,
+                confirmButtonText: "Delete",
+                denyButtonText: `Don't delete`,
+                icon: "warning"
+            });
+
+            if (result.isConfirmed) {
+                await axios.delete(`https://task-management-application-6she.onrender.com/delete/${id}`);
+                Swal.fire("Deleted!", "Your task has been deleted.", "success");
+                fetchTasks();
+            }
         } catch (error) {
             toast.error('Failed to delete task');
         }
@@ -79,6 +111,7 @@ const HomePage = () => {
 
     const taskCounts = computeTaskCounts();
 
+
     return (
         <div className='home_container'>
 
@@ -93,13 +126,37 @@ const HomePage = () => {
                 <button className='pending' onClick={() => setFilter('pending')}>Pending ({taskCounts.pending})</button>
                 <button className='completed' onClick={() => setFilter('completed')}>Completed ({taskCounts.completed})</button>
             </div>
-            <TaskList
-                tasks={tasks}
-                filter={filter}
-                onEdit={handleEditTask}
-                onDelete={handleDeleteTask}
-                onView={handleViewTask}
-            />
+
+            {
+                loading ?
+                    (
+                        <div className='loader items-center h-4/5'>
+
+                            <RevolvingDot
+                                visible={true}
+                                height="80"
+                                width="80"
+                                color="#4fa94d"
+                                ariaLabel="revolving-dot-loading"
+                                wrapperStyle={{}}
+                                wrapperClass=""
+                            />
+                            <p>Please Wait, data fetching...</p>
+                        </div>
+
+                    )
+                    :
+                    (
+                        <TaskList
+                            tasks={tasks}
+                            filter={filter}
+                            onEdit={handleEditTask}
+                            onDelete={handleDeleteTask}
+                            onView={handleViewTask}
+                        />
+                    )
+            }
+
             {isModalOpen && (
                 <TaskForm
                     task={currentTask}
@@ -107,6 +164,7 @@ const HomePage = () => {
                     refreshTasks={fetchTasks}
                 />
             )}
+
         </div>
     );
 };

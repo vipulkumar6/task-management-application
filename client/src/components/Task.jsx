@@ -28,7 +28,7 @@ const Task = ({ task, onEdit, onDelete, onView }) => {
                 <div className="buttons">
                     <Tooltip title="View">
                         <IconButton>
-                            <VisibilityIcon onClick={() => onView(task._id)} />
+                            <VisibilityIcon onClick={() => onView(task)} />
                         </IconButton>
                     </Tooltip>
                     <Tooltip title="Edit">

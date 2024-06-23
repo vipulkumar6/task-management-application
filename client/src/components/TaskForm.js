@@ -6,8 +6,11 @@ import { Textarea } from "@nextui-org/react";
 import { DatePicker } from "@nextui-org/react";
 import { parseDate, CalendarDate } from '@internationalized/date'; // Ensure this is the correct import
 import { Checkbox } from "@nextui-org/react";
+import { RevolvingDot } from 'react-loader-spinner'
 
 const TaskForm = ({ task, onClose, refreshTasks }) => {
+
+    const [loading, setLoading] = useState(false)
     const initialData = task || { title: '', description: '', due_date: '', priority: false, completed: false };
 
     const formatDate = (dateString) => {
@@ -32,11 +35,13 @@ const TaskForm = ({ task, onClose, refreshTasks }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true)
         try {
             const dataToSubmit = {
                 ...formData,
                 due_date: formData.due_date ? formData.due_date.toString() : ''
             };
+
 
             if (task) {
                 await axios.put(`https://task-management-application-6she.onrender.com/update/${task._id}`, dataToSubmit);
@@ -51,12 +56,16 @@ const TaskForm = ({ task, onClose, refreshTasks }) => {
             console.error('Error saving task:', error);
             toast.error(`Failed to save task: ${error.message}`);
         }
+        finally {
+            setLoading(false)
+        }
     };
 
     return (
         <div className="modal">
             <div className="modal-content">
-                <h2>{task ? 'Edit Task' : 'Add New Task'}</h2>
+                <h2 className='text-base task_add_head'>{task ? 'Edit Task' : 'Add New Task'}</h2>
+                <hr className='task_add_head_divider' />
                 <form onSubmit={handleSubmit}>
                     <div className="title-container">
                         <Input
@@ -116,6 +125,23 @@ const TaskForm = ({ task, onClose, refreshTasks }) => {
                         <button className='cancelBtn' type="button" onClick={onClose}>Cancel</button>
                     </div>
                 </form>
+                {
+                    loading &&
+                    (
+                        <div className='loader_for_add'>
+                            <RevolvingDot
+                                visible={true}
+                                height={40}
+                                width={40}
+                                radius={13}
+                                color="#4fa94d"
+                                ariaLabel="revolving-dot-loading"
+                                wrapperStyle={{}}
+                                wrapperClass=""
+                            />
+                        </div>
+                    )
+                }
             </div>
         </div>
     );
